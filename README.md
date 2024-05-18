@@ -1,7 +1,6 @@
-```markdown
 # Database Column Explorer
 
-    Database Column Explorer is a tool to search for columns across multiple databases in an SQL Server instance. It uses a Levenshtein distance function to find columns that match friendly names, even if the actual column names are slightly different.
+Database Column Explorer is a tool to search for columns across multiple databases in an SQL Server instance. It uses a Levenshtein distance function to find columns that match friendly names, even if the actual column names are slightly different.
 
 ## Features
 
@@ -33,7 +32,6 @@ or
 pip install pyodbc pandas openpyxl
 ```
 
-
 ### Step 2: Prepare the SQL Server
 
 Ensure you have access to the SQL Server and the necessary permissions to create functions and stored procedures.
@@ -55,7 +53,7 @@ database = 'master'  # Use any database just to execute the stored procedure
 python app.py
 ```
 
-### Python Script Explanation
+## Python Script Explanation
 
 The `app.py` script performs the following tasks:
 
@@ -66,7 +64,7 @@ The `app.py` script performs the following tasks:
 5. **Save Results**: Saves the search results to an Excel file (`column_search_results.xlsx`).
 6. **Clean Up**: Drops the Levenshtein function and stored procedure to ensure they are not left in the database.
 
-### Logging
+## Logging
 
 The script includes detailed logging to `column_search.log`, which records:
 
@@ -77,7 +75,7 @@ The script includes detailed logging to `column_search.log`, which records:
 - Dropping of SQL objects
 - Any errors encountered during the process
 
-### Adjusting Friendly Names and Patterns
+## Adjusting Friendly Names and Patterns
 
 In the `create_procedure_sql` string within `app.py`, update the `@ColumnPatterns` table with your friendly names and patterns:
 
@@ -89,7 +87,7 @@ INSERT INTO @ColumnPatterns (FriendlyName, Pattern) VALUES
 -- Add your friendly names and patterns here
 ```
 
-### Adding Delay to Avoid Server Overload
+## Adding Delay to Avoid Server Overload
 
 A delay is added between database queries to avoid overloading the server. You can adjust the delay time as needed in the stored procedure creation section:
 
@@ -97,11 +95,11 @@ A delay is added between database queries to avoid overloading the server. You c
 WAITFOR DELAY '00:00:10';  -- Adjust the delay time as needed
 ```
 
-### Error Handling
+## Error Handling
 
 The script includes comprehensive error handling to manage database and general errors, logging them with details about where the error occurred.
 
-### Clean Up
+## Clean Up
 
 The script ensures that the Levenshtein function and the `SearchColumns` stored procedure are dropped after the results are fetched to prevent unauthorized use.
 
@@ -121,11 +119,3 @@ The output is saved in an Excel file named `column_search_results.xlsx`, contain
 This tool helps you efficiently search for column names across multiple databases in your SQL Server instance using fuzzy matching with Levenshtein distance. The automated process ensures minimal manual effort and reduces the risk of missing relevant columns.
 
 For any issues or further customization, please refer to the logs in `column_search.log`.
-```
-
-### Instructions for Use
-- Update the script with your SQL Server credentials.
-- Adjust the friendly names and patterns as necessary.
-- Run the script and check the `column_search_results.xlsx` file for the results.
-
-This `README.md` file provides a comprehensive guide to setting up, running, and understanding the project, making it easy for anyone to get started.
